@@ -29,6 +29,54 @@ return require('packer').startup(function(use)
 	  end
   })
 
+  use ({
+	  'rebelot/kanagawa.nvim',
+	  as = 'kanagawa',
+	  config = function()
+		  vim.cmd('colorscheme kanagawa')
+	  end
+  })
+
+  use ({
+	  'navarasu/onedark.nvim',
+	  as = 'onedark',
+	  config = function()
+		  vim.cmd('colorscheme onedark')
+	  end
+  })
+
+  use ({
+	  'bluz71/vim-nightfly-colors',
+	  as = 'nightfly',
+	  config = function()
+		  vim.cmd('colorscheme nightfly')
+	  end
+  })
+
+  use ({
+	  'bluz71/vim-moonfly-colors',
+	  as = 'moonfly',
+	  config = function()
+		  vim.cmd('colorscheme moonfly')
+	  end
+  })
+
+  use ({
+	  'ray-x/aurora',
+	  as = 'aurora',
+	  config = function()
+		  vim.cmd('colorscheme aurora')
+	  end
+  })
+
+  use ({
+	  'yonlu/omni.vim',
+	  as = 'omni',
+	  config = function()
+		  vim.cmd('colorscheme omni')
+	  end
+  })
+
   use {
 	  'nvim-treesitter/nvim-treesitter',
 	  run = ':TSUpdate'
@@ -38,6 +86,7 @@ return require('packer').startup(function(use)
   use ('theprimeagen/harpoon')
   use ('mbbill/undotree')
   use ('tpope/vim-fugitive')
+  use ('Exafunction/codeium.vim')
 
   use {
 	  'VonHeikemen/lsp-zero.nvim',
