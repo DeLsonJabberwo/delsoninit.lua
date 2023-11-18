@@ -52,7 +52,7 @@ end)
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-	ensure_installed = {'rust_analyzer', 'lua_ls', 'lua_ls', 'html', 'pylsp', 'marksman', 'jsonls', 'cssls', 'yamlls'},
+	ensure_installed = {'rust_analyzer', 'lua_ls', 'clangd', 'html', 'pylsp', 'marksman', 'jsonls', 'cssls', 'yamlls'},
 	handlers = {
 		lsp.default_setup,
 -- 		lua_ls = function()
