@@ -1,97 +1,95 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
 -- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
+-- vim.cmd [[packadd packer.nvim]]
 
-return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
-
-  use {
+return require('lazy').setup({
+  {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.4',
 	  -- or                            , branch = '0.1.x',
-	  requires = { {'nvim-lua/plenary.nvim'} }
-  }
+	  dependencies = { {'nvim-lua/plenary.nvim'} }
+  },
 
-  use({
+  -- Colorschemes
+  {
 	  'rose-pine/neovim',
-	  as = 'rose-pine',
+	  name = 'rose-pine',
 	  config = function()
 		  vim.cmd('colorscheme rose-pine')
 	  end
-  })
+  },
 
-  use ({
+  {
 	  'EdenEast/nightfox.nvim',
-	  as = 'nightfox',
+	  name = 'nightfox',
 	  config = function()
 		  vim.cmd('colorscheme nightfox')
 	  end
-  })
+  },
 
-  use ({
+  {
 	  'rebelot/kanagawa.nvim',
-	  as = 'kanagawa',
+	  name = 'kanagawa',
 	  config = function()
 		  vim.cmd('colorscheme kanagawa')
 	  end
-  })
+  },
 
-  use ({
+  {
 	  'navarasu/onedark.nvim',
-	  as = 'onedark',
+	  name = 'onedark',
 	  config = function()
 		  vim.cmd('colorscheme onedark')
 	  end
-  })
+  },
 
-  use ({
+  {
 	  'bluz71/vim-nightfly-colors',
-	  as = 'nightfly',
+	  name = 'nightfly',
 	  config = function()
 		  vim.cmd('colorscheme nightfly')
 	  end
-  })
+  },
 
-  use ({
+  {
 	  'bluz71/vim-moonfly-colors',
-	  as = 'moonfly',
+	  name = 'moonfly',
 	  config = function()
 		  vim.cmd('colorscheme moonfly')
 	  end
-  })
+  },
 
-  use ({
+  {
 	  'ray-x/aurora',
-	  as = 'aurora',
+	  name = 'aurora',
 	  config = function()
 		  vim.cmd('colorscheme aurora')
 	  end
-  })
+  },
 
-  use ({
+  {
 	  'yonlu/omni.vim',
-	  as = 'omni',
+	  name = 'omni',
 	  config = function()
 		  vim.cmd('colorscheme omni')
 	  end
-  })
+  },
 
-  use {
+  {
 	  'nvim-treesitter/nvim-treesitter',
-	  run = ':TSUpdate'
-  }
+	  build = ':TSUpdate'
+  },
 
-  use ('nvim-treesitter/playground')
-  use ('theprimeagen/harpoon')
-  use ('mbbill/undotree')
-  use ('tpope/vim-fugitive')
-  use ('Exafunction/codeium.vim')
+  'nvim-treesitter/playground',
+  'ThePrimeagen/harpoon',
+  'mbbill/undotree',
+  'tpope/vim-fugitive',
+  'Exafunction/codeium.vim',
 
-  use {
+  {
 	  'VonHeikemen/lsp-zero.nvim',
 	  branch = 'v3.x',
-	  requires = {
+	  dependencies = {
 		  --- Uncomment these if you want to manage LSP servers from neovim
 		  {'williamboman/mason.nvim'},
 		  {'williamboman/mason-lspconfig.nvim'},
@@ -103,6 +101,6 @@ return require('packer').startup(function(use)
 		  {'hrsh7th/cmp-nvim-lsp'},
 		  {'L3MON4D3/LuaSnip'},
 	  }
-}
+  }
 
-end)
+})
