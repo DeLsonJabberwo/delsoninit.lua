@@ -84,7 +84,7 @@ return require('lazy').setup({
   'ThePrimeagen/harpoon',
   'mbbill/undotree',
   'tpope/vim-fugitive',
-  'Exafunction/codeium.vim',
+--  'Exafunction/codeium.vim',
 
   {
 	  'VonHeikemen/lsp-zero.nvim',
