@@ -1,22 +1,18 @@
-local mark = require("harpoon.mark")
-local ui = require("harpoon.ui")
+local harpoon = require("harpoon")
 
-vim.keymap.set("n", "<leader>a", mark.add_file)
-vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+-- REQUIRED
+harpoon:setup()
+-- REQUIRED
 
-vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
-vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
-vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
-vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
+vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
+vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
 
--- For some reason, the above method works here even though it still doesn't in delson.remap
-
--- vim.api.nvim_set_keymap("n", "<leader>a", [[<cmd>lua mark.add_file()<CR>]], { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<C-e>", [[<cmd>lua ui.toggle_quick_menu()<CR>]], { noremap = true, silent = true })
--- 
--- vim.api.nvim_set_keymap("n", "<C-h>", '<cmd>lua ui.nav_file(1)<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<C-t>", '<cmd>lua ui.nav_file(2)<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<C-n>", '<cmd>lua ui.nav_file(3)<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<C-s>", '<cmd>lua ui.nav_file(4)<CR>', { noremap = true, silent = true }) ]]--
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
 

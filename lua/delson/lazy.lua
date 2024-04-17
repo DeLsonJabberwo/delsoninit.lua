@@ -28,6 +28,17 @@ return require('lazy').setup({
   },
 
   {
+      'uloco/bluloco.nvim',
+      name = 'bluloco',
+      lazy = false,
+      priority = 1000,
+      dependencies = { 'rktjmp/lush.nvim' },
+      config = function()
+          -- your optional config goes here, see below.
+      end,
+  },
+
+  {
 	  'rebelot/kanagawa.nvim',
 	  name = 'kanagawa',
 	  config = function()
@@ -80,11 +91,20 @@ return require('lazy').setup({
 	  build = ':TSUpdate'
   },
 
+  {
+      "ThePrimeagen/harpoon",
+      branch = "harpoon2",
+      dependencies = { "nvim-lua/plenary.nvim" }
+  },
+
   'nvim-treesitter/playground',
-  'ThePrimeagen/harpoon',
   'mbbill/undotree',
   'tpope/vim-fugitive',
+--  'github/copilot.vim',
+  'junegunn/goyo.vim',
 --  'Exafunction/codeium.vim',
+--  'm4xshen/autoclose.nvim',
+  'ThePrimeagen/vim-apm',
 
   {
 	  'VonHeikemen/lsp-zero.nvim',
