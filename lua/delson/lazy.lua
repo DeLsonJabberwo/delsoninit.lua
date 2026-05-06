@@ -87,11 +87,6 @@ return require('lazy').setup({
   },
 
   {
-	  'nvim-treesitter/nvim-treesitter',
-	  build = ':TSUpdate'
-  },
-
-  {
       "ThePrimeagen/harpoon",
       branch = "harpoon2",
       dependencies = { "nvim-lua/plenary.nvim" }
@@ -106,14 +101,23 @@ return require('lazy').setup({
       end
   },
 
-  'nvim-treesitter/playground',
   'mbbill/undotree',
   'tpope/vim-fugitive',
---  'github/copilot.vim',
   'junegunn/goyo.vim',
---  'Exafunction/codeium.vim',
---  'm4xshen/autoclose.nvim',
   'ThePrimeagen/vim-apm',
+
+  {
+      "mfussenegger/nvim-dap",
+      event = "VeryLazy",
+      dependencies = {
+          "rcarriga/nvim-dap-ui",
+          "nvim-neotest/nvim-nio",
+          "jay-babu/mason-nvim-dap.nvim",
+          "theHamsta/nvim-dap-virtual-text",
+      },
+  },
+
+  "ThePrimeagen/99",
 
   {
 	  'VonHeikemen/lsp-zero.nvim',

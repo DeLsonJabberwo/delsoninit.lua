@@ -16,10 +16,21 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 
 cmp.setup({
 	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
+		completion = cmp.config.window.bordered({
+			border = 'single',
+			winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder,Search:None',
+		}),
+		documentation = cmp.config.window.bordered({
+			border = 'single',
+			winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder,Search:None',
+		}),
 	},
-	mapping = cmp_mappings;
+	mapping = cmp_mappings,
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'buffer' },
+        { name = 'path' },
+    }),
 })
 
 lsp.set_preferences({
@@ -52,9 +63,141 @@ end)
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-	ensure_installed = {'rust_analyzer', 'lua_ls', 'jdtls', 'bashls', 'cmake', 'clangd', 'html', 'pylsp', 'marksman', 'jsonls', 'cssls', 'yamlls'},
+	ensure_installed = {
+        'gopls',
+        'rust_analyzer',
+        'lua_ls',
+        'jdtls',
+        'bashls',
+        'cmake',
+        'clangd',
+        'html',
+        'pylsp',
+        'cssls',
+        'ts_ls',
+        'tailwindcss',
+        'eslint',
+        'htmx',
+        'templ',
+        'marksman',
+        'jsonls',
+        'yamlls',
+    },
 	handlers = {
 		lsp.default_setup,
+        html = function()
+            require("lspconfig").html.setup({
+                filetypes = { "html", "templ" },
+                init_options = {
+                    embedded_languages = {
+                        javascript = true,
+                        css = true
+                    }
+                }
+            })
+        end,
+        gopls = function()
+            require("lspconfig").gopls.setup({
+                filetypes = { "go", "gomod", "gowork", "gotmpl" },
+                settings = {
+                    gopls = {
+                        analyses = {
+                            unusedparams = true,
+                        },
+                        staticcheck = true,
+                        hints = {
+                            assignVariableTypes = true,
+                            compositeLiteralFields = true,
+                            constantValues = true,
+                            functionTypeParameters = true,
+                            parameterNames = true,
+                            rangeVariableTypes = true,
+                        },
+                    },
+                },
+            })
+        end,
+        templ = function()
+            require("lspconfig").templ.setup({
+                filetypes = { "templ" },
+            })
+        end,
+        tailwindcss = function()
+            require("lspconfig").tailwindcss.setup({
+                filetypes = {
+                    "html",
+                    "css",
+                    "scss",
+                    "javascript",
+                    "javascriptreact",
+                    "typescript",
+                    "typescriptreact",
+                    "svelte",
+                    "vue",
+                    "templ",
+                },
+                init_options = {
+                    userLanguages = {
+                        templ = "html",
+                    },
+                },
+                root_dir = require('lspconfig.util').root_pattern(
+                    "tailwind.config.js",
+                    "tailwind.config.cjs",
+                    "package.json",
+                    ".git"
+                ) or vim.fn.getcwd(),
+                settings = {
+                    tailwindCSS = {
+                        experimental = {
+                            classRegex = {
+                                [[class="([^"]*)"]], -- Matches class="..."
+                                [[class: "([^"]*)"]], -- Matches class: "..."
+                            },
+                        },
+                        validate = true,
+                        lint = {
+                            cssConflict = "warning",
+                            invalidApply = "error",
+                            invalidConfigPath = "error",
+                            invalidScreen = "error",
+                            invalidTailwindDirective = "error",
+                            invalidVariant = "error",
+                            recommendedVariantOrder = "warning",
+                        },
+                    },
+                },
+            })
+        end,
+        ts_ls = function()
+            require("lspconfig").ts_ls.setup({
+                filetypes = {
+                    "javascript",
+                    "javascriptreact",
+                    "typescript",
+                    "typescriptreact",
+                    "templ", "html",
+                },
+                root_dir = require("lspconfig.util").root_pattern(
+                    "package.json",
+                    "tsconfig.json",
+                    "jsconfig.json",
+                    ".git"
+                ) or vim.fn.getcwd(),
+            })
+        end,
+        eslint = function ()
+            require("lspconfig").eslint.setup({
+                filetypes = {
+                    "javascript", "javascriptreact",
+                    "typescript", "typescriptreact",
+                    "html", "templ"
+                },
+                settings = {
+                    workingDirectory = { mode = "auto" },
+                }
+            })
+        end,
 -- 		lua_ls = function()
 -- 			local lua_opts = lsp.nvim_lua_ls()
 -- 			require('lspconfig').lua_ls.setup(lua_opts)
