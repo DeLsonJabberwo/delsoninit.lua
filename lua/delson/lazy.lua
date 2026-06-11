@@ -134,6 +134,14 @@ return require('lazy').setup({
 		  {'hrsh7th/cmp-nvim-lsp'},
 		  {'L3MON4D3/LuaSnip'},
 	  }
+  },
+
+  {
+      'dmtrKovalenko/fff.nvim',
+      build = function()
+          require('fff.download').download_or_build_binary()
+      end,
+      lazy = false,
   }
 
 })
